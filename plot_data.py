@@ -39,22 +39,18 @@ for row in data:
 	cnt.append(int(row[11]))
 
 all_features = np.array([dt, ssn, hday, wkd, wtr, tmp, atmp, hum, wspd, cas, reg, cnt])
-#all_features = np.reshape(11,len(dt))
-#work_fts = np.array([])
-#work_fts = np.vstack((work_fts, all_features[all_features[:,11] == 1]
 
-work_fts = []
-non_work_fts = []
+work_fts = np.arange(12)
+non_work_fts = np.arange(12)
 
 for i in range(len(wkd)):
     if wkd[i] == 1:
-        work_fts.append(all_features[11][i])
+        work_fts = np.vstack((work_fts,all_features[:,i].reshape(1,12)))
     if wkd[i] == 0:
-        non_work_fts.append(all_features[11][i])
+        non_work_fts = np.vstack((non_work_fts,all_features[:,i].reshape(1,12)))
+
+print(work_fts)
 
 
-print(all_features)
-#print(wkd)
-#print(work_fts)
-#plt.plot(work_fts)
-#plt.show()
+plt.plot(work_fts[:,11])
+plt.show()
