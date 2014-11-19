@@ -43,14 +43,22 @@ all_features = np.array([dt, ssn, hday, wkd, wtr, tmp, atmp, hum, wspd, cas, reg
 work_fts = np.arange(12)
 non_work_fts = np.arange(12)
 
+print(dt[1].hour)
+
+
 for i in range(len(wkd)):
     if wkd[i] == 1:
         work_fts = np.vstack((work_fts,all_features[:,i].reshape(1,12)))
     if wkd[i] == 0:
         non_work_fts = np.vstack((non_work_fts,all_features[:,i].reshape(1,12)))
 
+def split(arr,cond):
+    return [arr[cond], arr[~cond]]
+
 print(work_fts)
 
+#print(split(work_fts,cnt<50))
+#print(work_fts)
 
-plt.plot(work_fts[:,11])
-plt.show()
+#plt.plot(work_fts[1:,0].hour(),work_fts[:,11])
+#plt.show()
